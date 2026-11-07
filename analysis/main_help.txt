@@ -1,0 +1,56 @@
+usage: main.py [-h] [--data_dir DATA_DIR] [--output_dir OUTPUT_DIR]
+               [--data_name DATA_NAME] [--do_eval] [--load_model LOAD_MODEL]
+               [--train_name TRAIN_NAME] [--num_items NUM_ITEMS]
+               [--num_users NUM_USERS] [--lr LR] [--batch_size BATCH_SIZE]
+               [--epochs EPOCHS] [--no_cuda] [--log_freq LOG_FREQ]
+               [--patience PATIENCE] [--num_workers NUM_WORKERS] [--seed SEED]
+               [--weight_decay WEIGHT_DECAY] [--adam_beta1 ADAM_BETA1]
+               [--adam_beta2 ADAM_BETA2] [--gpu_id GPU_ID]
+               [--variance VARIANCE] [--model_type MODEL_TYPE]
+               [--max_seq_length MAX_SEQ_LENGTH] [--hidden_size HIDDEN_SIZE]
+               [--num_hidden_layers NUM_HIDDEN_LAYERS]
+               [--hidden_act HIDDEN_ACT]
+               [--num_attention_heads NUM_ATTENTION_HEADS]
+               [--attention_probs_dropout_prob ATTENTION_PROBS_DROPOUT_PROB]
+               [--hidden_dropout_prob HIDDEN_DROPOUT_PROB]
+               [--initializer_range INITIALIZER_RANGE]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  --data_dir DATA_DIR
+  --output_dir OUTPUT_DIR
+  --data_name DATA_NAME
+  --do_eval
+  --load_model LOAD_MODEL
+  --train_name TRAIN_NAME
+  --num_items NUM_ITEMS
+  --num_users NUM_USERS
+  --lr LR               learning rate of adam
+  --batch_size BATCH_SIZE
+                        number of batch_size
+  --epochs EPOCHS       number of epochs
+  --no_cuda
+  --log_freq LOG_FREQ   per epoch print res
+  --patience PATIENCE   how long to wait after last time validation loss
+                        improved
+  --num_workers NUM_WORKERS
+  --seed SEED
+  --weight_decay WEIGHT_DECAY
+                        weight_decay of adam
+  --adam_beta1 ADAM_BETA1
+                        adam first beta value
+  --adam_beta2 ADAM_BETA2
+                        adam second beta value
+  --gpu_id GPU_ID       gpu_id
+  --variance VARIANCE
+  --model_type MODEL_TYPE
+  --max_seq_length MAX_SEQ_LENGTH
+  --hidden_size HIDDEN_SIZE
+                        embedding dimension
+  --num_hidden_layers NUM_HIDDEN_LAYERS
+                        number of blocks
+  --hidden_act HIDDEN_ACT
+  --num_attention_heads NUM_ATTENTION_HEADS
+  --attention_probs_dropout_prob ATTENTION_PROBS_DROPOUT_PROB
+  --hidden_dropout_prob HIDDEN_DROPOUT_PROB
+  --initializer_range INITIALIZER_RANGE
