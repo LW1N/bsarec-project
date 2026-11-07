@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 
 PATH = os.path.expanduser("~/BSARec/src/data/LastFM.txt")
 OUT = os.path.expanduser("~/BSARec/analysis/figures")
-os.makedirs(OUT, exist_ok=True)
 
 seqs, bad = {}, 0
 with open(PATH) as f:

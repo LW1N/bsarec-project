@@ -1,0 +1,13 @@
+users: 1090 (paper: 1090)
+artists: 3646 (paper: 3646)
+interactions: 52551 (paper: 52551)
+unparseable lines: 0
+artist id range: 1 - 3646 | missing ids: 0
+seq length min/median/max: 5 19 899
+users with < 3 interactions (cannot split): 0
+users longer than 50 (model sees last 50): 272
+back-to-back repeats: 0
+test targets already earlier in history: 0
+top 1% of artists' share of interactions: 8.0%
+artists with < 5 interactions: 0.0%
+figures saved to /home/lucas/BSARec/analysis/figures
