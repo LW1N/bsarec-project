@@ -3,3 +3,4 @@ src/output/
 *.pth
 *.pt
 *.pth
+__pycache__/
