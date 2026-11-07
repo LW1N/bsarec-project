@@ -1,0 +1,29 @@
+### Share of top-10 recs that are top-20% artists
+- GRU4Rec: 68.7%
+- SASRec: 82.5%
+- BSARec: 53.5%
+
+### Overall NDCG@10 (should match the logs)
+GRU4Rec    0.0158
+SASRec     0.0322
+BSARec     0.0381
+
+### NDCG@10 by history_length
+                GRU4Rec  SASRec  BSARec
+history_length                         
+short            0.0290  0.0526  0.0513
+medium           0.0114  0.0302  0.0323
+long             0.0072  0.0139  0.0307
+
+### NDCG@10 by taste
+            GRU4Rec  SASRec  BSARec
+taste                              
+niche        0.0067  0.0120  0.0223
+mixed        0.0074  0.0280  0.0336
+mainstream   0.0334  0.0565  0.0584
+
+### NDCG@10 by test_artist
+                   GRU4Rec  SASRec  BSARec
+test_artist                               
+long tail           0.0037  0.0084  0.0263
+popular (top 20%)   0.0311  0.0623  0.0530

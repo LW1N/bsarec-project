@@ -155,4 +155,7 @@ class Trainer:
                     pred_list = np.append(pred_list, batch_pred_list, axis=0)
                     answer_list = np.append(answer_list, answers.cpu().data.numpy(), axis=0)
 
+            if self.args.do_eval:
+                np.save(f"{self.args.output_dir}/{self.args.model_type}_preds.npy", pred_list)
+                np.save(f"{self.args.output_dir}/{self.args.model_type}_answers.npy", answer_list)
             return self.get_full_sort_score(epoch, answer_list, pred_list)
