@@ -1,5 +1,5 @@
-import os, json, pandas as pd
-R = os.path.expanduser("~/BSARec/analysis/results")
+import json, pandas as pd
+from config import RESULTS as R
 df = pd.read_csv(f"{R}/results.csv")
 m = [c for c in df.columns if c not in ("model", "seed")]
 mean, std = df.groupby("model")[m].mean(), df.groupby("model")[m].std()

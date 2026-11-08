@@ -1,11 +1,10 @@
-import os, collections
+import collections
 import numpy as np
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 
-PATH = os.path.expanduser("~/BSARec/src/data/LastFM.txt")
-OUT = os.path.expanduser("~/BSARec/analysis/figures")
+from config import ROOT, DATA as PATH, FIGURES as OUT
 
 seqs, bad = {}, 0
 with open(PATH) as f:
@@ -43,4 +42,4 @@ plt.savefig(f"{OUT}/seq_lengths.png", dpi=200, bbox_inches="tight")
 plt.figure(); plt.loglog(np.arange(1, len(c) + 1), c)
 plt.xlabel("artist rank"); plt.ylabel("interactions"); plt.title("Artist popularity")
 plt.savefig(f"{OUT}/artist_popularity.png", dpi=200, bbox_inches="tight")
-print("figures saved to", OUT)
+print("figures saved to", OUT.relative_to(ROOT))

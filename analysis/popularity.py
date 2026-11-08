@@ -1,6 +1,5 @@
-import os, json, math, collections
-
-PATH = os.path.expanduser("~/BSARec/src/data/LastFM.txt")
+import json, math, collections
+from config import DATA as PATH, RESULTS
 KS = [5, 10, 20]
 
 seqs = [list(map(int, l.split()))[1:] for l in open(PATH) if l.strip()]
@@ -32,4 +31,4 @@ def evaluate(cut):  # cut=2 -> validation, cut=1 -> test
 
 out = {"valid": evaluate(2), "test": evaluate(1)}
 print(json.dumps(out, indent=2))
-json.dump(out, open(os.path.expanduser("~/BSARec/analysis/results/popularity.json"), "w"), indent=2)
+json.dump(out, open(RESULTS / "popularity.json", "w"), indent=2)

@@ -1,6 +1,5 @@
-import os, collections, numpy as np, pandas as pd
-DATA = os.path.expanduser("~/BSARec/src/data/LastFM.txt")
-OUT = os.path.expanduser("~/BSARec/src/output")
+import collections, numpy as np, pandas as pd
+from config import DATA, OUTPUT as OUT
 MODELS = ["GRU4Rec", "SASRec", "BSARec"]
 
 seqs = [list(map(int, l.split()))[1:] for l in open(DATA) if l.strip()]

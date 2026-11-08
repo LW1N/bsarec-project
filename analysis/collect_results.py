@@ -1,6 +1,5 @@
 import os, re, glob, csv
-OUT = os.path.expanduser("~/BSARec/src/output")
-RES = os.path.expanduser("~/BSARec/analysis/results")
+from config import OUTPUT as OUT, RESULTS as RES
 COLS = ["HR@5", "HR@10", "HR@20", "NDCG@5", "NDCG@10", "NDCG@20"]
 PAT = re.compile(r"(HR|HIT|NDCG)@(\d+)\D{0,4}?([01]\.\d+)")
 

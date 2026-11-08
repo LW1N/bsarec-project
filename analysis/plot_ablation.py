@@ -1,9 +1,9 @@
 import os, pandas as pd, matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-A = os.path.expanduser("~/BSARec/analysis")
-hp = dict(l.strip().split("=", 1) for l in open(f"{A}/hparams.sh") if "=" in l)
-df = pd.read_csv(f"{A}/results/ablation.csv", dtype={"value": str})
+from config import HPARAMS, RESULTS, FIGURES
+hp = dict(l.strip().split("=", 1) for l in open(HPARAMS) if "=" in l)
+df = pd.read_csv(RESULTS / "ablation.csv", dtype={"value": str})
 df.loc[(df.param == "alpha") & (df.value == "default"), "value"] = hp["ALPHA"]
 df.loc[(df.param == "c") & (df.value == "default"), "value"] = hp["C"]
 df["value"] = df.value.astype(float)
@@ -15,4 +15,4 @@ for i, p in enumerate(["alpha", "c"]):
     print(f"### NDCG@10 by {p}")
     print(d[["value", "HR@10", "NDCG@10"]].to_string(index=False), "\n")
 plt.tight_layout()
-plt.savefig(f"{A}/figures/ablation.png", dpi=200)
+plt.savefig(FIGURES / "ablation.png", dpi=200)
