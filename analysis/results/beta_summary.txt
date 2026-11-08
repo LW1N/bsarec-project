@@ -1,0 +1,21 @@
+### beta per layer and run (beta = sqrt_beta^2, over 64 hidden dims)
+    run  layer   mean    std  min  median    max
+authors      1 0.2318 0.3719  0.0  0.0174 1.4228
+authors      2 0.1529 0.3583  0.0  0.0000 1.5623
+    s42      1 0.2407 0.3834  0.0  0.0287 1.7385
+    s42      2 0.1660 0.4019  0.0  0.0001 1.9946
+    s43      1 0.3275 0.6141  0.0  0.0263 3.2522
+    s43      2 0.2262 0.5874  0.0  0.0021 3.2675
+    s44      1 0.3049 0.3731  0.0  0.1368 2.0412
+    s44      2 0.1761 0.2515  0.0  0.0543 1.3305
+
+### Ours: mean of per-run mean beta, ± std over seeds
+layer
+1     0.291 ± 0.0451
+2    0.1894 ± 0.0322
+
+### Layer 1 mean beta > layer 2 mean beta?
+- authors: 0.2318 vs 0.1529 -> yes
+- s42: 0.2407 vs 0.1660 -> yes
+- s43: 0.3275 vs 0.2262 -> yes
+- s44: 0.3049 vs 0.1761 -> yes
