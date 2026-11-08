@@ -1,6 +1,9 @@
-src/output/
+# Model checkpoints (large, regenerable by training)
 *.pt
 *.pth
-*.pt
-*.pth
+
+# Saved predictions in src/output/ are overwritten by every --do_eval run;
+# per-seed copies are kept in analysis/predictions/ instead
+src/output/*.npy
+
 __pycache__/
