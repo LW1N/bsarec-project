@@ -6,7 +6,10 @@ mean, std = df.groupby("model")[m].mean(), df.groupby("model")[m].std()
 table = mean.round(4).astype(str) + " ± " + std.round(4).astype(str)
 pop = json.load(open(f"{R}/popularity.json"))["test"]
 table.loc["Popularity"] = [str(pop[c]) for c in m]
-table = table.reindex(["Popularity", "GRU4Rec", "SASRec", "BSARec"])
+# Paper's Table 2 order; models we have not run are skipped. Variants (BSARecAlpha*)
+# are reported separately by decomposition.py.
+ORDER = ["Popularity", "GRU4Rec", "Caser", "SASRec", "BERT4Rec", "FMLPRec", "DuoRec", "FEARec", "BSARec"]
+table = table.reindex([m for m in ORDER if m in table.index])
 table.to_csv(f"{R}/main_table.csv")
 print("### Main results (test, mean ± std over seeds)")
 print(table.to_string())

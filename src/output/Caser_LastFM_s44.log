@@ -1,0 +1,142 @@
+2026-11-08 15:02:51,042 - Namespace(data_dir='./data/', output_dir='output/', data_name='LastFM', do_eval=False, load_model=None, train_name='Caser_LastFM_s44', num_items=10, num_users=1091, lr=0.001, batch_size=256, epochs=200, no_cuda=False, log_freq=1, patience=10, num_workers=4, seed=44, weight_decay=0.0, adam_beta1=0.9, adam_beta2=0.999, gpu_id='0', variance=5, model_type='Caser', max_seq_length=50, hidden_size=64, num_hidden_layers=2, hidden_act='gelu', num_attention_heads=1, attention_probs_dropout_prob=0.5, hidden_dropout_prob=0.5, initializer_range=0.02, nh=8, nv=4, reg_weight=0.0001, cuda_condition=True, data_file='./data/LastFM.txt', item_size=3647, checkpoint_path='output/Caser_LastFM_s44.pt', same_target_path='./data/LastFM_same_target.npy')
+2026-11-08 15:02:51,055 - CaserModel(
+  (item_embeddings): Embedding(3647, 64, padding_idx=0)
+  (position_embeddings): Embedding(50, 64)
+  (user_embeddings): Embedding(1091, 64, padding_idx=0)
+  (conv_v): Conv2d(1, 4, kernel_size=(50, 1), stride=(1, 1))
+  (conv_h): ModuleList(
+    (0): Conv2d(1, 8, kernel_size=(1, 64), stride=(1, 1))
+    (1): Conv2d(1, 8, kernel_size=(2, 64), stride=(1, 1))
+    (2): Conv2d(1, 8, kernel_size=(3, 64), stride=(1, 1))
+    (3): Conv2d(1, 8, kernel_size=(4, 64), stride=(1, 1))
+    (4): Conv2d(1, 8, kernel_size=(5, 64), stride=(1, 1))
+    (5): Conv2d(1, 8, kernel_size=(6, 64), stride=(1, 1))
+    (6): Conv2d(1, 8, kernel_size=(7, 64), stride=(1, 1))
+    (7): Conv2d(1, 8, kernel_size=(8, 64), stride=(1, 1))
+    (8): Conv2d(1, 8, kernel_size=(9, 64), stride=(1, 1))
+    (9): Conv2d(1, 8, kernel_size=(10, 64), stride=(1, 1))
+    (10): Conv2d(1, 8, kernel_size=(11, 64), stride=(1, 1))
+    (11): Conv2d(1, 8, kernel_size=(12, 64), stride=(1, 1))
+    (12): Conv2d(1, 8, kernel_size=(13, 64), stride=(1, 1))
+    (13): Conv2d(1, 8, kernel_size=(14, 64), stride=(1, 1))
+    (14): Conv2d(1, 8, kernel_size=(15, 64), stride=(1, 1))
+    (15): Conv2d(1, 8, kernel_size=(16, 64), stride=(1, 1))
+    (16): Conv2d(1, 8, kernel_size=(17, 64), stride=(1, 1))
+    (17): Conv2d(1, 8, kernel_size=(18, 64), stride=(1, 1))
+    (18): Conv2d(1, 8, kernel_size=(19, 64), stride=(1, 1))
+    (19): Conv2d(1, 8, kernel_size=(20, 64), stride=(1, 1))
+    (20): Conv2d(1, 8, kernel_size=(21, 64), stride=(1, 1))
+    (21): Conv2d(1, 8, kernel_size=(22, 64), stride=(1, 1))
+    (22): Conv2d(1, 8, kernel_size=(23, 64), stride=(1, 1))
+    (23): Conv2d(1, 8, kernel_size=(24, 64), stride=(1, 1))
+    (24): Conv2d(1, 8, kernel_size=(25, 64), stride=(1, 1))
+    (25): Conv2d(1, 8, kernel_size=(26, 64), stride=(1, 1))
+    (26): Conv2d(1, 8, kernel_size=(27, 64), stride=(1, 1))
+    (27): Conv2d(1, 8, kernel_size=(28, 64), stride=(1, 1))
+    (28): Conv2d(1, 8, kernel_size=(29, 64), stride=(1, 1))
+    (29): Conv2d(1, 8, kernel_size=(30, 64), stride=(1, 1))
+    (30): Conv2d(1, 8, kernel_size=(31, 64), stride=(1, 1))
+    (31): Conv2d(1, 8, kernel_size=(32, 64), stride=(1, 1))
+    (32): Conv2d(1, 8, kernel_size=(33, 64), stride=(1, 1))
+    (33): Conv2d(1, 8, kernel_size=(34, 64), stride=(1, 1))
+    (34): Conv2d(1, 8, kernel_size=(35, 64), stride=(1, 1))
+    (35): Conv2d(1, 8, kernel_size=(36, 64), stride=(1, 1))
+    (36): Conv2d(1, 8, kernel_size=(37, 64), stride=(1, 1))
+    (37): Conv2d(1, 8, kernel_size=(38, 64), stride=(1, 1))
+    (38): Conv2d(1, 8, kernel_size=(39, 64), stride=(1, 1))
+    (39): Conv2d(1, 8, kernel_size=(40, 64), stride=(1, 1))
+    (40): Conv2d(1, 8, kernel_size=(41, 64), stride=(1, 1))
+    (41): Conv2d(1, 8, kernel_size=(42, 64), stride=(1, 1))
+    (42): Conv2d(1, 8, kernel_size=(43, 64), stride=(1, 1))
+    (43): Conv2d(1, 8, kernel_size=(44, 64), stride=(1, 1))
+    (44): Conv2d(1, 8, kernel_size=(45, 64), stride=(1, 1))
+    (45): Conv2d(1, 8, kernel_size=(46, 64), stride=(1, 1))
+    (46): Conv2d(1, 8, kernel_size=(47, 64), stride=(1, 1))
+    (47): Conv2d(1, 8, kernel_size=(48, 64), stride=(1, 1))
+    (48): Conv2d(1, 8, kernel_size=(49, 64), stride=(1, 1))
+    (49): Conv2d(1, 8, kernel_size=(50, 64), stride=(1, 1))
+  )
+  (fc1): Linear(in_features=656, out_features=64, bias=True)
+  (fc2): Linear(in_features=128, out_features=64, bias=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (ac_conv): ReLU()
+  (ac_fc): ReLU()
+)
+2026-11-08 15:02:51,791 - Total Parameters: 1010140
+2026-11-08 15:03:06,741 - {'epoch': 0, 'rec_loss': '1.3256'}
+2026-11-08 15:03:07,356 - {'Epoch': 0, 'HR@5': '0.0128', 'NDCG@5': '0.0076', 'HR@10': '0.0303', 'NDCG@10': '0.0132', 'HR@20': '0.0450', 'NDCG@20': '0.0169'}
+2026-11-08 15:03:07,357 - Validation score increased.  Saving model ...
+2026-11-08 15:03:21,801 - {'epoch': 1, 'rec_loss': '1.2152'}
+2026-11-08 15:03:22,423 - {'Epoch': 1, 'HR@5': '0.0110', 'NDCG@5': '0.0059', 'HR@10': '0.0165', 'NDCG@10': '0.0076', 'HR@20': '0.0468', 'NDCG@20': '0.0151'}
+2026-11-08 15:03:22,424 - EarlyStopping counter: 1 out of 10
+2026-11-08 15:03:36,785 - {'epoch': 2, 'rec_loss': '1.1738'}
+2026-11-08 15:03:37,412 - {'Epoch': 2, 'HR@5': '0.0083', 'NDCG@5': '0.0064', 'HR@10': '0.0257', 'NDCG@10': '0.0118', 'HR@20': '0.0477', 'NDCG@20': '0.0173'}
+2026-11-08 15:03:37,413 - Validation score increased.  Saving model ...
+2026-11-08 15:03:51,831 - {'epoch': 3, 'rec_loss': '1.1475'}
+2026-11-08 15:03:52,452 - {'Epoch': 3, 'HR@5': '0.0119', 'NDCG@5': '0.0071', 'HR@10': '0.0193', 'NDCG@10': '0.0095', 'HR@20': '0.0385', 'NDCG@20': '0.0143'}
+2026-11-08 15:03:52,453 - EarlyStopping counter: 1 out of 10
+2026-11-08 15:04:06,901 - {'epoch': 4, 'rec_loss': '1.1291'}
+2026-11-08 15:04:07,512 - {'Epoch': 4, 'HR@5': '0.0183', 'NDCG@5': '0.0091', 'HR@10': '0.0284', 'NDCG@10': '0.0123', 'HR@20': '0.0440', 'NDCG@20': '0.0162'}
+2026-11-08 15:04:07,514 - EarlyStopping counter: 2 out of 10
+2026-11-08 15:04:22,151 - {'epoch': 5, 'rec_loss': '1.1132'}
+2026-11-08 15:04:22,799 - {'Epoch': 5, 'HR@5': '0.0193', 'NDCG@5': '0.0094', 'HR@10': '0.0312', 'NDCG@10': '0.0133', 'HR@20': '0.0514', 'NDCG@20': '0.0183'}
+2026-11-08 15:04:22,800 - Validation score increased.  Saving model ...
+2026-11-08 15:04:37,436 - {'epoch': 6, 'rec_loss': '1.0992'}
+2026-11-08 15:04:38,070 - {'Epoch': 6, 'HR@5': '0.0119', 'NDCG@5': '0.0065', 'HR@10': '0.0284', 'NDCG@10': '0.0117', 'HR@20': '0.0495', 'NDCG@20': '0.0170'}
+2026-11-08 15:04:38,071 - EarlyStopping counter: 1 out of 10
+2026-11-08 15:04:52,636 - {'epoch': 7, 'rec_loss': '1.0888'}
+2026-11-08 15:04:53,254 - {'Epoch': 7, 'HR@5': '0.0128', 'NDCG@5': '0.0081', 'HR@10': '0.0312', 'NDCG@10': '0.0141', 'HR@20': '0.0486', 'NDCG@20': '0.0186'}
+2026-11-08 15:04:53,256 - Validation score increased.  Saving model ...
+2026-11-08 15:05:07,637 - {'epoch': 8, 'rec_loss': '1.0711'}
+2026-11-08 15:05:08,258 - {'Epoch': 8, 'HR@5': '0.0193', 'NDCG@5': '0.0101', 'HR@10': '0.0294', 'NDCG@10': '0.0132', 'HR@20': '0.0523', 'NDCG@20': '0.0190'}
+2026-11-08 15:05:08,259 - Validation score increased.  Saving model ...
+2026-11-08 15:05:22,733 - {'epoch': 9, 'rec_loss': '1.0668'}
+2026-11-08 15:05:23,352 - {'Epoch': 9, 'HR@5': '0.0128', 'NDCG@5': '0.0077', 'HR@10': '0.0312', 'NDCG@10': '0.0136', 'HR@20': '0.0523', 'NDCG@20': '0.0189'}
+2026-11-08 15:05:23,354 - EarlyStopping counter: 1 out of 10
+2026-11-08 15:05:37,741 - {'epoch': 10, 'rec_loss': '1.0492'}
+2026-11-08 15:05:38,374 - {'Epoch': 10, 'HR@5': '0.0128', 'NDCG@5': '0.0081', 'HR@10': '0.0330', 'NDCG@10': '0.0146', 'HR@20': '0.0514', 'NDCG@20': '0.0192'}
+2026-11-08 15:05:38,375 - Validation score increased.  Saving model ...
+2026-11-08 15:05:52,896 - {'epoch': 11, 'rec_loss': '1.0388'}
+2026-11-08 15:05:53,523 - {'Epoch': 11, 'HR@5': '0.0183', 'NDCG@5': '0.0110', 'HR@10': '0.0312', 'NDCG@10': '0.0151', 'HR@20': '0.0550', 'NDCG@20': '0.0210'}
+2026-11-08 15:05:53,524 - Validation score increased.  Saving model ...
+2026-11-08 15:06:07,915 - {'epoch': 12, 'rec_loss': '1.0253'}
+2026-11-08 15:06:08,538 - {'Epoch': 12, 'HR@5': '0.0220', 'NDCG@5': '0.0138', 'HR@10': '0.0339', 'NDCG@10': '0.0177', 'HR@20': '0.0578', 'NDCG@20': '0.0236'}
+2026-11-08 15:06:08,539 - Validation score increased.  Saving model ...
+2026-11-08 15:06:22,953 - {'epoch': 13, 'rec_loss': '1.0096'}
+2026-11-08 15:06:23,580 - {'Epoch': 13, 'HR@5': '0.0220', 'NDCG@5': '0.0157', 'HR@10': '0.0321', 'NDCG@10': '0.0189', 'HR@20': '0.0615', 'NDCG@20': '0.0263'}
+2026-11-08 15:06:23,581 - Validation score increased.  Saving model ...
+2026-11-08 15:06:38,385 - {'epoch': 14, 'rec_loss': '1.0048'}
+2026-11-08 15:06:39,010 - {'Epoch': 14, 'HR@5': '0.0193', 'NDCG@5': '0.0126', 'HR@10': '0.0303', 'NDCG@10': '0.0161', 'HR@20': '0.0569', 'NDCG@20': '0.0229'}
+2026-11-08 15:06:39,012 - EarlyStopping counter: 1 out of 10
+2026-11-08 15:06:53,507 - {'epoch': 15, 'rec_loss': '0.9938'}
+2026-11-08 15:06:54,132 - {'Epoch': 15, 'HR@5': '0.0183', 'NDCG@5': '0.0122', 'HR@10': '0.0339', 'NDCG@10': '0.0173', 'HR@20': '0.0523', 'NDCG@20': '0.0219'}
+2026-11-08 15:06:54,133 - EarlyStopping counter: 2 out of 10
+2026-11-08 15:07:08,710 - {'epoch': 16, 'rec_loss': '0.9776'}
+2026-11-08 15:07:09,350 - {'Epoch': 16, 'HR@5': '0.0165', 'NDCG@5': '0.0083', 'HR@10': '0.0303', 'NDCG@10': '0.0128', 'HR@20': '0.0505', 'NDCG@20': '0.0179'}
+2026-11-08 15:07:09,351 - EarlyStopping counter: 3 out of 10
+2026-11-08 15:07:23,982 - {'epoch': 17, 'rec_loss': '0.9676'}
+2026-11-08 15:07:24,611 - {'Epoch': 17, 'HR@5': '0.0202', 'NDCG@5': '0.0114', 'HR@10': '0.0349', 'NDCG@10': '0.0161', 'HR@20': '0.0550', 'NDCG@20': '0.0213'}
+2026-11-08 15:07:24,612 - EarlyStopping counter: 4 out of 10
+2026-11-08 15:07:39,005 - {'epoch': 18, 'rec_loss': '0.9491'}
+2026-11-08 15:07:39,634 - {'Epoch': 18, 'HR@5': '0.0174', 'NDCG@5': '0.0121', 'HR@10': '0.0339', 'NDCG@10': '0.0174', 'HR@20': '0.0550', 'NDCG@20': '0.0227'}
+2026-11-08 15:07:39,635 - EarlyStopping counter: 5 out of 10
+2026-11-08 15:07:54,296 - {'epoch': 19, 'rec_loss': '0.9386'}
+2026-11-08 15:07:54,918 - {'Epoch': 19, 'HR@5': '0.0202', 'NDCG@5': '0.0118', 'HR@10': '0.0413', 'NDCG@10': '0.0188', 'HR@20': '0.0651', 'NDCG@20': '0.0247'}
+2026-11-08 15:07:54,919 - EarlyStopping counter: 6 out of 10
+2026-11-08 15:08:09,234 - {'epoch': 20, 'rec_loss': '0.9267'}
+2026-11-08 15:08:09,884 - {'Epoch': 20, 'HR@5': '0.0211', 'NDCG@5': '0.0123', 'HR@10': '0.0422', 'NDCG@10': '0.0190', 'HR@20': '0.0624', 'NDCG@20': '0.0241'}
+2026-11-08 15:08:09,886 - EarlyStopping counter: 7 out of 10
+2026-11-08 15:08:24,479 - {'epoch': 21, 'rec_loss': '0.9214'}
+2026-11-08 15:08:25,116 - {'Epoch': 21, 'HR@5': '0.0193', 'NDCG@5': '0.0133', 'HR@10': '0.0275', 'NDCG@10': '0.0158', 'HR@20': '0.0459', 'NDCG@20': '0.0204'}
+2026-11-08 15:08:25,118 - EarlyStopping counter: 8 out of 10
+2026-11-08 15:08:39,896 - {'epoch': 22, 'rec_loss': '0.9103'}
+2026-11-08 15:08:40,505 - {'Epoch': 22, 'HR@5': '0.0211', 'NDCG@5': '0.0134', 'HR@10': '0.0294', 'NDCG@10': '0.0160', 'HR@20': '0.0569', 'NDCG@20': '0.0229'}
+2026-11-08 15:08:40,506 - EarlyStopping counter: 9 out of 10
+2026-11-08 15:08:54,873 - {'epoch': 23, 'rec_loss': '0.8949'}
+2026-11-08 15:08:55,524 - {'Epoch': 23, 'HR@5': '0.0248', 'NDCG@5': '0.0139', 'HR@10': '0.0404', 'NDCG@10': '0.0188', 'HR@20': '0.0633', 'NDCG@20': '0.0244'}
+2026-11-08 15:08:55,525 - EarlyStopping counter: 10 out of 10
+2026-11-08 15:08:55,525 - Early stopping
+2026-11-08 15:08:55,525 - ---------------Test Score---------------
+2026-11-08 15:08:56,192 - {'Epoch': 0, 'HR@5': '0.0275', 'NDCG@5': '0.0193', 'HR@10': '0.0376', 'NDCG@10': '0.0227', 'HR@20': '0.0514', 'NDCG@20': '0.0261'}
+2026-11-08 15:08:56,193 - Caser_LastFM_s44
+2026-11-08 15:08:56,193 - {'Epoch': 0, 'HR@5': '0.0275', 'NDCG@5': '0.0193', 'HR@10': '0.0376', 'NDCG@10': '0.0227', 'HR@20': '0.0514', 'NDCG@20': '0.0261'}
