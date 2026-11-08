@@ -10,4 +10,4 @@ back-to-back repeats: 0
 test targets already earlier in history: 0
 top 1% of artists' share of interactions: 8.0%
 artists with < 5 interactions: 0.0%
-figures saved to /home/lucas/BSARec/analysis/figures
+figures saved to analysis/figures
