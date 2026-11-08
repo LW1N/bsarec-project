@@ -1,3 +1,31 @@
+# Reproducing BSARec on LastFM (CMPE 257 Final Project)
+
+This repository is a reproduction study of **BSARec** (Shin et al., "An Attentive Inductive Bias for Sequential Recommendation beyond the Self-Attention," AAAI 2024).
+
+## Relationship to the original code
+
+- Built on the authors' official implementation: https://github.com/yehjin-shin/BSARec, at commit \`${UP}\`.
+- This is not a GitHub fork. I cloned the original repository and pushed it to this repository, so the full upstream history is preserved. **Every commit after \`${UP:0:7}\` is my work.**
+- See only my commits: \`git log --oneline ${UP:0:7}..HEAD\`
+- See every file I changed or added: \`git diff ${UP:0:7} HEAD --stat\`
+- The model implementations (\`src/model/\`), training framework and LastFM data file are the original authors' work.
+
+## What I added
+
+| Path | Purpose |
+| --- | --- |
+| \`analysis/validate_data.py\` | Checks the dataset against the paper's statistics |
+| \`analysis/popularity.py\` | Popularity baseline (not in the original code) |
+| \`analysis/collect_results.py\` | Collects test metrics from training logs into CSV |
+| \`analysis/summarize.py\` | Main results table and comparison with the paper |
+| \`analysis/plot_ablation.py\` | Alpha and c sensitivity figure |
+| \`analysis/groups.py\` | Per-user group analysis (history length, taste, popularity) |
+| \`analysis/hparams.sh\` | Hyperparameters used for all runs |
+| \`analysis/results/\`, \`analysis/figures/\` | All results and figures used in the report |
+| \`src/trainers.py\` | 3-line patch: saves each user's top-20 predictions during \`--do_eval\` (training and scoring unchanged) |
+| \`src/output/*.log\` | Training logs from my runs |
+| \`notes.md\` | Lab notebook: setup, commands, results and judgments |
+
 <div align=center>
 <h1>An Attentive Inductive Bias for Sequential Recommendation beyond the Self-Attention</h1>
 
