@@ -1,0 +1,71 @@
+### Block outputs, mean over 1090 test sequences; mean ± std over seeds ['42', '43', '44']
+(layer 0 = embeddings; cos_sim/top1_share higher and hf_share lower = smoother)
+                            cos_sim         hf_share       top1_share
+model        layer                                                   
+SASRec       0      0.1563 ± 0.0108   0.579 ± 0.0143  0.2678 ± 0.0018
+             1       0.275 ± 0.0166   0.4952 ± 0.017  0.3568 ± 0.0094
+             2       0.547 ± 0.0416  0.3087 ± 0.0318   0.5889 ± 0.036
+BSARecAlpha0 0      0.1748 ± 0.0152  0.5474 ± 0.0077  0.2785 ± 0.0105
+             1      0.3142 ± 0.0201  0.4481 ± 0.0136  0.3869 ± 0.0153
+             2       0.528 ± 0.0307  0.3035 ± 0.0218   0.572 ± 0.0263
+BSARec       0      0.1702 ± 0.0047  0.5256 ± 0.0087  0.2872 ± 0.0085
+             1       0.3284 ± 0.009   0.386 ± 0.0013  0.4028 ± 0.0033
+             2      0.6493 ± 0.0307  0.1593 ± 0.0165  0.6804 ± 0.0282
+
+### Change from layer 0 to layer 2 (mean over seeds)
+              cos_sim  hf_share  top1_share
+model                                      
+SASRec         0.3907   -0.2704      0.3211
+BSARecAlpha0   0.3531   -0.2439      0.2934
+BSARec         0.4791   -0.3663      0.3932
+
+### Robustness: block outputs after removing the vector shared by all positions (mean ± std over seeds)
+                            cos_sim         hf_share       top1_share
+model        layer                                                   
+SASRec       0      0.1492 ± 0.0111  0.5881 ± 0.0152  0.2597 ± 0.0009
+             1        0.2564 ± 0.01  0.5087 ± 0.0127  0.3436 ± 0.0044
+             2      0.3812 ± 0.0146  0.4198 ± 0.0134  0.4476 ± 0.0093
+BSARecAlpha0 0      0.1623 ± 0.0089  0.5577 ± 0.0046  0.2724 ± 0.0067
+             1       0.275 ± 0.0086  0.4748 ± 0.0064  0.3586 ± 0.0052
+             2      0.4308 ± 0.0125  0.3656 ± 0.0111  0.4923 ± 0.0098
+BSARec       0       0.161 ± 0.0017   0.5367 ± 0.009  0.2823 ± 0.0096
+             1      0.3065 ± 0.0061  0.4006 ± 0.0041  0.3911 ± 0.0012
+             2      0.5768 ± 0.0228  0.1926 ± 0.0126  0.6201 ± 0.0198
+
+### Inside each layer: attention branch vs Fourier branch (mean ± std over seeds)
+                                      cos_sim         hf_share       top1_share
+model        layer part                                                        
+SASRec       1     attention  0.2563 ± 0.0146  0.5096 ± 0.0162   0.342 ± 0.0062
+             2     attention  0.4144 ± 0.0288     0.4 ± 0.0241  0.4719 ± 0.0229
+BSARecAlpha0 1     attention  0.3228 ± 0.0237  0.4441 ± 0.0164  0.3946 ± 0.0206
+             2     attention  0.4898 ± 0.0297  0.3292 ± 0.0218  0.5379 ± 0.0256
+BSARec       1     attention  0.6754 ± 0.0047  0.1894 ± 0.0014  0.7023 ± 0.0037
+                   fourier     0.2768 ± 0.017  0.4163 ± 0.0037   0.3618 ± 0.008
+             2     attention  0.8135 ± 0.0067  0.0935 ± 0.0055  0.8295 ± 0.0062
+                   fourier    0.5738 ± 0.0358  0.1919 ± 0.0195  0.6138 ± 0.0313
+
+### Final layer (2) by history length (mean ± std over seeds)
+                             cos_sim         hf_share       top1_share
+short  SASRec        0.6317 ± 0.0314  0.1466 ± 0.0148  0.7004 ± 0.0243
+       BSARecAlpha0   0.604 ± 0.0306  0.1452 ± 0.0125  0.6776 ± 0.0248
+       BSARec        0.6883 ± 0.0188  0.1128 ± 0.0075    0.746 ± 0.015
+medium SASRec        0.5502 ± 0.0428  0.3172 ± 0.0335   0.5859 ± 0.037
+       BSARecAlpha0  0.5335 ± 0.0315  0.3093 ± 0.0241  0.5697 ± 0.0274
+       BSARec        0.7045 ± 0.0267    0.176 ± 0.017   0.7266 ± 0.025
+long   SASRec        0.4593 ± 0.0508  0.4619 ± 0.0472  0.4807 ± 0.0468
+       BSARecAlpha0  0.4466 ± 0.0312   0.4555 ± 0.029  0.4689 ± 0.0277
+       BSARec        0.5554 ± 0.0469   0.189 ± 0.0251  0.5689 ± 0.0449
+
+### Per-seed final-layer cos_sim: is BSARec smoother than SASRec?
+block:
+model  SASRec  BSARecAlpha0  BSARec
+seed                               
+42     0.5010        0.5381  0.6577
+43     0.5822        0.4935  0.6750
+44     0.5577        0.5523  0.6153
+block centered:
+model  SASRec  BSARecAlpha0  BSARec
+seed                               
+42     0.3654        0.4327  0.5740
+43     0.3842        0.4174  0.6008
+44     0.3941        0.4422  0.5554
