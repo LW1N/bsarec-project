@@ -1,6 +1,12 @@
-# Model checkpoints (large, regenerable by training)
+# Model checkpoints (regenerable by training)
 *.pt
 *.pth
+# ...except the ~1.3 MB checkpoints the analysis scripts load (beta.py, oversmoothing.py,
+# and the --do_eval prediction step), so they run from a fresh clone without retraining
+!src/output/GRU4Rec_LastFM_s*.pt
+!src/output/SASRec_LastFM_s*.pt
+!src/output/BSARec_LastFM_s*.pt
+!src/output/BSARecAlpha0_LastFM_s*.pt
 
 # Saved predictions in src/output/ are overwritten by every --do_eval run;
 # per-seed copies are kept in analysis/predictions/ instead
