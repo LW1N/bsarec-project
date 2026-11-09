@@ -23,6 +23,7 @@ This repository is a reproduction study of **BSARec** (Shin et al., "An Attentiv
 | `analysis/decomposition.py` | Splits BSARec's gain over SASRec into a loss effect and a Fourier-branch effect |
 | `analysis/beta.py` | Learned β per layer (paper Fig. 7a) |
 | `analysis/oversmoothing.py` | Layer-wise oversmoothing of SASRec vs BSARec (paper Fig. 3) |
+| `analysis/oversmoothing_depth.py` | Compares the oversmoothing measures at 2, 4 and 8 layers |
 | `analysis/config.py` | Repo-relative paths shared by the analysis scripts |
 | `analysis/hparams.sh` | Hyperparameters used for all runs |
 | `analysis/results/`, `analysis/figures/` | All results and figures used in the report |
