@@ -4,19 +4,24 @@ COLS = ["HR@5", "HR@10", "HR@20", "NDCG@5", "NDCG@10", "NDCG@20"]
 PAT = re.compile(r"(HR|HIT|NDCG)@(\d+)\D{0,4}?([01]\.\d+)")
 
 def last_metrics(path):
-    found = None
+    """Metrics on the last metrics line after 'Test Score' (the test result), or None
+    if the run has not reached testing yet (e.g. still training)."""
+    found, tested = None, False
     for line in open(path, errors="ignore"):
+        tested = tested or "Test Score" in line
         m = PAT.findall(line)
-        if len(m) >= 4:
+        if tested and len(m) >= 4:
             found = {("HR" if k == "HIT" else k) + "@" + n: float(v) for k, n, v in m}
     return found
 
 main, abl = [], []
 for path in sorted(glob.glob(f"{OUT}/*.log")):
     name = os.path.basename(path)[:-4]
+    if not re.fullmatch(r"\w+?_LastFM_s\d+|abl_(alpha|c)[\d.]+", name):
+        continue                                   # eval/predict/smoke-test/upstream logs
     met = last_metrics(path)
     if met is None:
-        print("no metrics found in", name)
+        print("skipped (no test result yet):", name)
         continue
     row = [met.get(c, "") for c in COLS]
     m = re.fullmatch(r"(\w+?)_LastFM_s(\d+)", name)
