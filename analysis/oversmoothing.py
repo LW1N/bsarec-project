@@ -15,6 +15,14 @@ positions:
              (1 = rank-one collapse)
 
 Layer 0 is the embedding output; layers 1-2 are the transformer/BSARec blocks.
+
+The paper's Fig. 3 ("user sequence output embedding") can also be read as comparing
+users rather than positions, so part "across users" measures each user's
+last-position vector (the one the model ranks artists with) across the 1,090 users:
+cos_sim = mean pairwise cosine between users, top1_share = sigma_1^2 / sum sigma^2
+of the users x hidden matrix (hf_share does not apply). Part "across users centered"
+repeats top1_share after subtracting the mean user vector, so a direction shared by
+all users cannot count as collapse (centered cos_sim is ~0 by construction, so NaN).
 Robustness check ("centered"): the same metrics after subtracting, per layer,
 the mean vector over all real positions of all sequences, so a vector shared by
 every position (e.g. a LayerNorm bias) cannot inflate the similarity.
@@ -79,6 +87,17 @@ def metrics(x):
     return cos, hf, sv[0] / sv.sum()
 
 
+def across_users(u, center=False):
+    """u: (users, hidden), each user's last-position vector."""
+    if center:
+        u = u - u.mean(0)
+    un = u / np.linalg.norm(u, axis=1, keepdims=True).clip(1e-12)
+    n = len(u)
+    sv = np.linalg.svd(u, compute_uv=False) ** 2
+    cos = np.nan if center else ((un @ un.T).sum() - n) / (n * (n - 1))
+    return {"cos_sim": cos, "hf_share": np.nan, "top1_share": sv[0] / sv.sum()}
+
+
 def summarize(reps, n_real, center=False):
     """reps: (users, max_len, hidden) -> per-user metric arrays."""
     mu = np.concatenate([r[-n:] for r, n in zip(reps, n_real)]).mean(0) if center else 0
@@ -123,6 +142,10 @@ for model_name in MODELS:
                     sel = (group == g).to_numpy()
                     grows.append({"model": model_name, "seed": seed, "layer": i, "history_length": g,
                                   **{k: v[sel].mean() for k, v in m.items()}})
+        for i, t in enumerate(layers):
+            for part, center in [("across users", False), ("across users centered", True)]:
+                rows.append({"model": model_name, "seed": seed, "part": part, "layer": i,
+                             **across_users(t[:, -1, :].double().numpy(), center)})
 
 df, gdf = pd.DataFrame(rows), pd.DataFrame(grows)
 df.round(4).to_csv(RESULTS / "oversmoothing.csv", index=False)
@@ -132,8 +155,8 @@ METRICS = ["cos_sim", "hf_share", "top1_share"]
 pd.set_option("display.width", 200)
 
 
-def mean_std(d, by):
-    g = d.groupby(by)[METRICS]
+def mean_std(d, by, cols=METRICS):
+    g = d.groupby(by)[cols]
     return g.mean().round(4).astype(str) + " ± " + g.std().round(4).astype(str)
 
 
@@ -160,6 +183,17 @@ print("\n### Per-seed final-layer cos_sim: is BSARec smoother than SASRec?")
 for part in ["block", "block centered"]:
     fin = df[(df.part == part) & (df.layer == 2)].pivot(index="seed", columns="model", values="cos_sim")[MODELS]
     print(f"{part}:"); print(fin.round(4).to_string())
+
+print("\n### Across users: each user's last-position vector, the one used for ranking (mean ± std over seeds)")
+print("(the other reading of the paper's Fig. 3; higher = users' representations more alike)")
+across = df[df.part == "across users"]
+print(mean_std(across, ["model", "layer"], ["cos_sim", "top1_share"]).reindex(MODELS, level=0).to_string())
+print("per seed, layer 2 cos_sim:")
+print(across[across.layer == 2].pivot(index="seed", columns="model", values="cos_sim")[MODELS].round(4).to_string())
+print("Robustness: top1_share after removing the mean user vector (mean ± std over seeds); per seed, layer 2:")
+centered = df[df.part == "across users centered"]
+print(mean_std(centered, ["model", "layer"], ["top1_share"]).reindex(MODELS, level=0).to_string())
+print(centered[centered.layer == 2].pivot(index="seed", columns="model", values="top1_share")[MODELS].round(4).to_string())
 
 # Figure: two small multiples (cos_sim, hf_share) by layer; one line per model (seed mean),
 # faint points per seed. Colour + marker shape per model; direct labels at the line ends.
