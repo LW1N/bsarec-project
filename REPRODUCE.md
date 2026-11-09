@@ -50,11 +50,12 @@ python main.py --data_name LastFM --model_type BSARec --lr $LR --alpha $ALPHA --
 | Main runs: GRU4Rec, SASRec, BSARec × 3 seeds | 9 | 11 min |
 | α and c sweep (seed 42) | 10 | 17 min |
 | BSARec α = 0 and α = 1 × 3 seeds | 6 | 10 min |
+| Depth sweep: SASRec, BSARec α = 0, BSARec at 4 and 8 layers × 3 seeds (patience 30) | 18 | 87 min (4 layers 30, 8 layers 57) |
 | FMLPRec, BERT4Rec, Caser, DuoRec × 3 seeds | 12 | 45 min |
 | FEARec × 3 seeds | 3 | 2.3 h |
 | Predictions (`--do_eval`, eval only) and all analysis | 9 | 43 s |
 
-Full training takes about 3.7 h; FEARec alone accounts for most of it.
+Full training takes about 5.1 h; FEARec and the depth sweep account for most of it.
 
 ## 4. Expected differences from the paper
 
@@ -76,6 +77,7 @@ All paths are under `analysis/`. Report sections refer to the project report.
 | §6.3 User groups, §6.4 Popularity bias | NDCG@10 by history length, taste and test-artist popularity; share of popular artists in the top-10 | `results/groups_s42.txt`, `results/groups_s43.txt`, `results/groups_s44.txt` | `groups.py --seed <seed>` |
 | §6 Analysis | Learned β per layer (paper Fig. 7a) | `results/beta.csv`, `results/beta_summary.txt`, `figures/beta.png` | `beta.py` |
 | §6 Analysis | Oversmoothing per layer (paper Fig. 3) | `results/oversmoothing.txt`, `results/oversmoothing.csv`, `results/oversmoothing_groups.csv`, `figures/oversmoothing.png` | `oversmoothing.py` |
+| §6 Analysis | Oversmoothing at 4 and 8 layers, and 2/4/8-layer comparison of the final block | `results/oversmoothing_L4.txt`, `results/oversmoothing_L8.txt` (with `.csv`, `oversmoothing_groups_L*.csv`), `figures/oversmoothing_L4.png`, `figures/oversmoothing_L8.png`, `results/oversmoothing_depth.txt` | `oversmoothing.py --layers <L>`, `oversmoothing_depth.py` |
 
 Every script reads its paths from `analysis/config.py`, so it can also be run on its own from any directory, e.g. `python analysis/summarize.py > analysis/results/summary.txt`. `run_all.sh` shows the exact invocation of each one.
 

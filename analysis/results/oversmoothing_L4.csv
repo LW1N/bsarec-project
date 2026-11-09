@@ -1,0 +1,229 @@
+model,seed,part,layer,cos_sim,hf_share,top1_share
+SASRec,42,block,0,0.1582,0.5695,0.2585
+SASRec,42,block,1,0.2252,0.5187,0.3119
+SASRec,42,block,2,0.309,0.4585,0.3809
+SASRec,42,block,3,0.4166,0.3852,0.4734
+SASRec,42,block,4,0.6228,0.2484,0.6556
+SASRec,42,attention,1,0.2288,0.5191,0.314
+SASRec,42,attention,2,0.3094,0.4601,0.3804
+SASRec,42,attention,3,0.4029,0.3948,0.4604
+SASRec,42,attention,4,0.5127,0.3203,0.5573
+SASRec,42,block centered,0,0.1561,0.5742,0.2549
+SASRec,42,block centered,1,0.2183,0.5267,0.305
+SASRec,42,block centered,2,0.2868,0.4759,0.3619
+SASRec,42,block centered,3,0.3703,0.4174,0.4328
+SASRec,42,block centered,4,0.4437,0.3658,0.4962
+SASRec,42,across users,0,0.0064,,0.0822
+SASRec,42,across users centered,0,,,0.0826
+SASRec,42,across users,1,0.0159,,0.0862
+SASRec,42,across users centered,1,,,0.0875
+SASRec,42,across users,2,0.0421,,0.0929
+SASRec,42,across users centered,2,,,0.093
+SASRec,42,across users,3,0.0832,,0.1261
+SASRec,42,across users centered,3,,,0.1062
+SASRec,42,across users,4,0.327,,0.3378
+SASRec,42,across users centered,4,,,0.1179
+SASRec,43,block,0,0.1589,0.5681,0.2607
+SASRec,43,block,1,0.219,0.523,0.3076
+SASRec,43,block,2,0.3162,0.453,0.3885
+SASRec,43,block,3,0.4204,0.3815,0.478
+SASRec,43,block,4,0.6278,0.2447,0.6606
+SASRec,43,attention,1,0.2257,0.5209,0.3125
+SASRec,43,attention,2,0.3064,0.4613,0.3786
+SASRec,43,attention,3,0.4018,0.3942,0.4606
+SASRec,43,attention,4,0.5172,0.3172,0.5621
+SASRec,43,block centered,0,0.1568,0.5726,0.257
+SASRec,43,block centered,1,0.2161,0.528,0.304
+SASRec,43,block centered,2,0.2944,0.4701,0.3704
+SASRec,43,block centered,3,0.3754,0.4129,0.4386
+SASRec,43,block centered,4,0.452,0.3604,0.5041
+SASRec,43,across users,0,0.0055,,0.0899
+SASRec,43,across users centered,0,,,0.0904
+SASRec,43,across users,1,0.013,,0.0962
+SASRec,43,across users centered,1,,,0.0976
+SASRec,43,across users,2,0.0442,,0.1033
+SASRec,43,across users centered,2,,,0.1077
+SASRec,43,across users,3,0.083,,0.1224
+SASRec,43,across users centered,3,,,0.117
+SASRec,43,across users,4,0.3284,,0.3368
+SASRec,43,across users centered,4,,,0.1262
+SASRec,44,block,0,0.1662,0.5662,0.2716
+SASRec,44,block,1,0.2167,0.5294,0.3098
+SASRec,44,block,2,0.2941,0.4744,0.3724
+SASRec,44,block,3,0.3971,0.4033,0.459
+SASRec,44,block,4,0.6074,0.2629,0.6422
+SASRec,44,attention,1,0.2248,0.5255,0.3158
+SASRec,44,attention,2,0.2901,0.479,0.3671
+SASRec,44,attention,3,0.3757,0.4186,0.4395
+SASRec,44,attention,4,0.4882,0.3423,0.5368
+SASRec,44,block centered,0,0.1574,0.5768,0.2625
+SASRec,44,block centered,1,0.2152,0.5333,0.3075
+SASRec,44,block centered,2,0.2836,0.4835,0.3637
+SASRec,44,block centered,3,0.362,0.4285,0.4289
+SASRec,44,block centered,4,0.4426,0.3735,0.4974
+SASRec,44,across users,0,0.0081,,0.1114
+SASRec,44,across users centered,0,,,0.1115
+SASRec,44,across users,1,0.0131,,0.1166
+SASRec,44,across users centered,1,,,0.1161
+SASRec,44,across users,2,0.0299,,0.1247
+SASRec,44,across users centered,2,,,0.1235
+SASRec,44,across users,3,0.0667,,0.1463
+SASRec,44,across users centered,3,,,0.1354
+SASRec,44,across users,4,0.308,,0.3228
+SASRec,44,across users centered,4,,,0.1467
+BSARecAlpha0,42,block,0,0.1533,0.5598,0.2584
+BSARecAlpha0,42,block,1,0.233,0.501,0.3188
+BSARecAlpha0,42,block,2,0.3278,0.4326,0.3977
+BSARecAlpha0,42,block,3,0.4424,0.3544,0.4973
+BSARecAlpha0,42,block,4,0.5913,0.2562,0.6283
+BSARecAlpha0,42,attention,1,0.2482,0.4921,0.3305
+BSARecAlpha0,42,attention,2,0.3528,0.417,0.4181
+BSARecAlpha0,42,attention,3,0.4486,0.3497,0.5017
+BSARecAlpha0,42,attention,4,0.5679,0.2709,0.6079
+BSARecAlpha0,42,block centered,0,0.1477,0.5691,0.2526
+BSARecAlpha0,42,block centered,1,0.2093,0.5215,0.3002
+BSARecAlpha0,42,block centered,2,0.2886,0.4628,0.3655
+BSARecAlpha0,42,block centered,3,0.3883,0.3926,0.4513
+BSARecAlpha0,42,block centered,4,0.4814,0.3274,0.5353
+BSARecAlpha0,42,across users,0,0.0064,,0.0761
+BSARecAlpha0,42,across users centered,0,,,0.0756
+BSARecAlpha0,42,across users,1,0.0186,,0.0777
+BSARecAlpha0,42,across users centered,1,,,0.0744
+BSARecAlpha0,42,across users,2,0.042,,0.0917
+BSARecAlpha0,42,across users centered,2,,,0.0821
+BSARecAlpha0,42,across users,3,0.0717,,0.13
+BSARecAlpha0,42,across users centered,3,,,0.1026
+BSARecAlpha0,42,across users,4,0.1853,,0.2161
+BSARecAlpha0,42,across users centered,4,,,0.1218
+BSARecAlpha0,43,block,0,0.1542,0.5633,0.2586
+BSARecAlpha0,43,block,1,0.2298,0.505,0.3166
+BSARecAlpha0,43,block,2,0.3253,0.4363,0.3952
+BSARecAlpha0,43,block,3,0.4262,0.3671,0.4822
+BSARecAlpha0,43,block,4,0.5722,0.2698,0.6107
+BSARecAlpha0,43,attention,1,0.2423,0.501,0.3248
+BSARecAlpha0,43,attention,2,0.3443,0.4252,0.4107
+BSARecAlpha0,43,attention,3,0.4382,0.3593,0.4917
+BSARecAlpha0,43,attention,4,0.5392,0.2913,0.5816
+BSARecAlpha0,43,block centered,0,0.1472,0.5725,0.2537
+BSARecAlpha0,43,block centered,1,0.2061,0.5248,0.3001
+BSARecAlpha0,43,block centered,2,0.2852,0.4662,0.3637
+BSARecAlpha0,43,block centered,3,0.3759,0.4015,0.4406
+BSARecAlpha0,43,block centered,4,0.4685,0.3359,0.5233
+BSARecAlpha0,43,across users,0,0.0063,,0.0822
+BSARecAlpha0,43,across users centered,0,,,0.0818
+BSARecAlpha0,43,across users,1,0.0179,,0.0834
+BSARecAlpha0,43,across users centered,1,,,0.082
+BSARecAlpha0,43,across users,2,0.041,,0.0925
+BSARecAlpha0,43,across users centered,2,,,0.0868
+BSARecAlpha0,43,across users,3,0.0621,,0.1228
+BSARecAlpha0,43,across users centered,3,,,0.1006
+BSARecAlpha0,43,across users,4,0.1679,,0.2069
+BSARecAlpha0,43,across users centered,4,,,0.1203
+BSARecAlpha0,44,block,0,0.1586,0.5604,0.2638
+BSARecAlpha0,44,block,1,0.2295,0.5068,0.3168
+BSARecAlpha0,44,block,2,0.3163,0.4441,0.3877
+BSARecAlpha0,44,block,3,0.4156,0.3767,0.4728
+BSARecAlpha0,44,block,4,0.5656,0.277,0.6048
+BSARecAlpha0,44,attention,1,0.2435,0.5009,0.327
+BSARecAlpha0,44,attention,2,0.3355,0.4329,0.4034
+BSARecAlpha0,44,attention,3,0.4216,0.3732,0.4772
+BSARecAlpha0,44,attention,4,0.5291,0.3009,0.5723
+BSARecAlpha0,44,block centered,0,0.154,0.5674,0.262
+BSARecAlpha0,44,block centered,1,0.2071,0.5254,0.3023
+BSARecAlpha0,44,block centered,2,0.2805,0.4711,0.3605
+BSARecAlpha0,44,block centered,3,0.3663,0.4106,0.4329
+BSARecAlpha0,44,block centered,4,0.4623,0.3435,0.5184
+BSARecAlpha0,44,across users,0,0.0073,,0.0891
+BSARecAlpha0,44,across users centered,0,,,0.0874
+BSARecAlpha0,44,across users,1,0.021,,0.0932
+BSARecAlpha0,44,across users centered,1,,,0.0898
+BSARecAlpha0,44,across users,2,0.0416,,0.1007
+BSARecAlpha0,44,across users centered,2,,,0.0926
+BSARecAlpha0,44,across users,3,0.0656,,0.1306
+BSARecAlpha0,44,across users centered,3,,,0.1059
+BSARecAlpha0,44,across users,4,0.1681,,0.2115
+BSARecAlpha0,44,across users centered,4,,,0.1303
+BSARec,42,block,0,0.1988,0.5237,0.3181
+BSARec,42,block,1,0.2741,0.4356,0.384
+BSARec,42,block,2,0.3628,0.3548,0.4561
+BSARec,42,block,3,0.4978,0.2544,0.5607
+BSARec,42,block,4,0.7133,0.117,0.7403
+BSARec,42,fourier,1,0.269,0.4474,0.3679
+BSARec,42,attention,1,0.4337,0.3572,0.5023
+BSARec,42,fourier,2,0.3616,0.3573,0.4483
+BSARec,42,attention,2,0.5593,0.2659,0.6139
+BSARec,42,fourier,3,0.4799,0.2629,0.5459
+BSARec,42,attention,3,0.6831,0.1705,0.7145
+BSARec,42,fourier,4,0.6593,0.1388,0.6942
+BSARec,42,attention,4,0.8127,0.0859,0.8292
+BSARec,42,block centered,0,0.1794,0.5416,0.3112
+BSARec,42,block centered,1,0.2527,0.4548,0.3746
+BSARec,42,block centered,2,0.3413,0.3724,0.4421
+BSARec,42,block centered,3,0.4775,0.268,0.5451
+BSARec,42,block centered,4,0.6721,0.1344,0.7058
+BSARec,42,across users,0,0.0214,,0.1673
+BSARec,42,across users centered,0,,,0.1704
+BSARec,42,across users,1,0.0394,,0.1555
+BSARec,42,across users centered,1,,,0.1617
+BSARec,42,across users,2,0.0425,,0.1683
+BSARec,42,across users centered,2,,,0.1755
+BSARec,42,across users,3,0.0416,,0.1427
+BSARec,42,across users centered,3,,,0.1444
+BSARec,42,across users,4,0.1155,,0.1881
+BSARec,42,across users centered,4,,,0.1601
+BSARec,43,block,0,0.1847,0.5219,0.2996
+BSARec,43,block,1,0.2813,0.4236,0.3727
+BSARec,43,block,2,0.3887,0.3258,0.4653
+BSARec,43,block,3,0.5052,0.2356,0.5686
+BSARec,43,block,4,0.734,0.0935,0.7588
+BSARec,43,fourier,1,0.2845,0.4218,0.367
+BSARec,43,attention,1,0.4117,0.3659,0.4725
+BSARec,43,fourier,2,0.4319,0.2902,0.4986
+BSARec,43,attention,2,0.5457,0.2689,0.5872
+BSARec,43,fourier,3,0.5401,0.202,0.5961
+BSARec,43,attention,3,0.6698,0.1685,0.701
+BSARec,43,fourier,4,0.6982,0.1013,0.7295
+BSARec,43,attention,4,0.7554,0.1088,0.7772
+BSARec,43,block centered,0,0.1553,0.5501,0.2704
+BSARec,43,block centered,1,0.2534,0.4473,0.3495
+BSARec,43,block centered,2,0.358,0.348,0.4367
+BSARec,43,block centered,3,0.4859,0.2469,0.5496
+BSARec,43,block centered,4,0.6701,0.114,0.7064
+BSARec,43,across users,0,0.0187,,0.0956
+BSARec,43,across users centered,0,,,0.097
+BSARec,43,across users,1,0.0518,,0.1037
+BSARec,43,across users centered,1,,,0.1002
+BSARec,43,across users,2,0.0602,,0.105
+BSARec,43,across users centered,2,,,0.0989
+BSARec,43,across users,3,0.0456,,0.0951
+BSARec,43,across users centered,3,,,0.0967
+BSARec,43,across users,4,0.1761,,0.2012
+BSARec,43,across users centered,4,,,0.1171
+BSARec,44,block,0,0.1835,0.5274,0.2962
+BSARec,44,block,1,0.2654,0.4432,0.3638
+BSARec,44,block,2,0.3464,0.3586,0.4308
+BSARec,44,block,3,0.4879,0.248,0.547
+BSARec,44,block,4,0.7031,0.1079,0.7302
+BSARec,44,fourier,1,0.2518,0.4494,0.345
+BSARec,44,attention,1,0.3833,0.384,0.4589
+BSARec,44,fourier,2,0.3448,0.36,0.4263
+BSARec,44,attention,2,0.5,0.3021,0.5512
+BSARec,44,fourier,3,0.4493,0.2633,0.5139
+BSARec,44,attention,3,0.6377,0.1969,0.6713
+BSARec,44,fourier,4,0.6487,0.128,0.6829
+BSARec,44,attention,4,0.7727,0.0988,0.7923
+BSARec,44,block centered,0,0.1706,0.542,0.2915
+BSARec,44,block centered,1,0.2455,0.461,0.3522
+BSARec,44,block centered,2,0.3284,0.3729,0.4219
+BSARec,44,block centered,3,0.468,0.2588,0.5412
+BSARec,44,block centered,4,0.6515,0.1254,0.6941
+BSARec,44,across users,0,0.0231,,0.133
+BSARec,44,across users centered,0,,,0.1337
+BSARec,44,across users,1,0.0442,,0.1156
+BSARec,44,across users centered,1,,,0.117
+BSARec,44,across users,2,0.045,,0.1217
+BSARec,44,across users centered,2,,,0.126
+BSARec,44,across users,3,0.0388,,0.1153
+BSARec,44,across users centered,3,,,0.109
+BSARec,44,across users,4,0.1173,,0.1773
+BSARec,44,across users centered,4,,,0.1357

@@ -32,6 +32,8 @@ source "$A/hparams.sh"                       # LR ALPHA C HEADS SEEDS
 ABL_SEED=42                                  # the alpha/c sweep is single-seed
 ALPHAS="0.0 0.1 0.3 0.5 0.7 1.0"             # sweep values besides the default ALPHA
 CS="1 5 7 9"                                 # sweep values besides the default C
+DEPTHS="4 8"                                 # oversmoothing depth sweep, besides the default 2 layers
+DEPTH_PATIENCE=30                            # deeper runs still improve after 10 flat epochs (default patience)
 BASELINES="FMLPRec BERT4Rec Caser DuoRec FEARec"  # extra paper baselines (upstream defaults)
 GROUP_MODELS="GRU4Rec SASRec BSARec"         # models in the per-user group analysis
 
@@ -71,6 +73,15 @@ if [[ $ANALYSIS_ONLY == 0 ]]; then
   for seed in $SEEDS; do
     run_main "BSARecAlpha0_LastFM_s$seed" $(bsarec_args) --alpha 0.0 --c "$C" --seed "$seed"
     run_main "BSARecAlpha1_LastFM_s$seed" $(bsarec_args) --alpha 1.0 --c "$C" --seed "$seed"
+  done
+
+  step "Depth sweep: SASRec, BSARec alpha = 0, BSARec at $DEPTHS layers x seeds (patience $DEPTH_PATIENCE)"
+  for L in $DEPTHS; do
+    for seed in $SEEDS; do
+      run_main "SASRecL${L}_LastFM_s$seed" --model_type SASRec --num_attention_heads "$HEADS" --num_hidden_layers "$L" --patience "$DEPTH_PATIENCE" --seed "$seed"
+      run_main "BSARecAlpha0L${L}_LastFM_s$seed" $(bsarec_args) --alpha 0.0 --c "$C" --num_hidden_layers "$L" --patience "$DEPTH_PATIENCE" --seed "$seed"
+      run_main "BSARecL${L}_LastFM_s$seed" $(bsarec_args) --alpha "$ALPHA" --c "$C" --num_hidden_layers "$L" --patience "$DEPTH_PATIENCE" --seed "$seed"
+    done
   done
 
   step "Baselines: $BASELINES x seeds"
@@ -115,6 +126,12 @@ step "Oversmoothing"
 if have_checkpoints $(for s in $SEEDS; do for m in SASRec BSARecAlpha0 BSARec; do echo ${m}_LastFM_s$s; done; done); then
   python "$A/oversmoothing.py" > "$R/oversmoothing.txt"
 else echo "skip: SASRec/BSARec checkpoints (*.pt) not found in src/output (train first)"; fi
+for L in $DEPTHS; do
+  if have_checkpoints $(for s in $SEEDS; do for m in SASRec BSARecAlpha0 BSARec; do echo ${m}L${L}_LastFM_s$s; done; done); then
+    python "$A/oversmoothing.py" --layers "$L" > "$R/oversmoothing_L$L.txt"
+  else echo "skip $L layers: depth-sweep checkpoints not found in src/output (train first)"; fi
+done
+python "$A/oversmoothing_depth.py" > "$R/oversmoothing_depth.txt"   # reads the committed CSVs
 
 step "User groups"
 for seed in $SEEDS; do

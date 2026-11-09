@@ -7,6 +7,9 @@
 !src/output/SASRec_LastFM_s*.pt
 !src/output/BSARec_LastFM_s*.pt
 !src/output/BSARecAlpha0_LastFM_s*.pt
+!src/output/SASRecL*_LastFM_s*.pt
+!src/output/BSARecL*_LastFM_s*.pt
+!src/output/BSARecAlpha0L*_LastFM_s*.pt
 
 # Saved predictions in src/output/ are overwritten by every --do_eval run;
 # per-seed copies are kept in analysis/predictions/ instead

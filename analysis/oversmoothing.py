@@ -14,7 +14,7 @@ positions:
   top1_share sigma_1^2 / sum sigma^2 of the positions x hidden matrix
              (1 = rank-one collapse)
 
-Layer 0 is the embedding output; layers 1-2 are the transformer/BSARec blocks.
+Layer 0 is the embedding output; layers 1..L are the transformer/BSARec blocks.
 
 The paper's Fig. 3 ("user sequence output embedding") can also be read as comparing
 users rather than positions, so part "across users" measures each user's
@@ -33,10 +33,13 @@ Models: SASRec, BSARecAlpha0 (SASRec architecture with BSARec's loss) and
 BSARec, seeds from hparams.sh. Model settings are read from each run's log.
 Inference only, on the CPU; nothing is trained.
 
+--layers L (default 2, the main runs) selects the depth: L != 2 loads the depth-sweep
+runs {Model}L{L}_LastFM_s{seed} and adds the suffix _L{L} to every output file.
+
 Writes results/oversmoothing.csv, results/oversmoothing_groups.csv,
 figures/oversmoothing.png; prints a summary (saved to results/oversmoothing.txt).
 """
-import ast, re, sys
+import argparse, ast, re, sys
 from argparse import Namespace
 import numpy as np, pandas as pd, torch, matplotlib
 matplotlib.use("Agg")
@@ -49,6 +52,11 @@ from model import MODEL_DICT  # upstream model code, unmodified
 SEEDS = re.search(r'SEEDS="([^"]+)"', HPARAMS.read_text()).group(1).split()
 MODELS = ["SASRec", "BSARecAlpha0", "BSARec"]
 LOW_BINS = 2   # BSARec keeps rfft bins < c // 2 + 1 = 2 as "low frequency" (c = 3)
+parser = argparse.ArgumentParser()
+parser.add_argument("--layers", type=int, default=2, help="number of blocks of the runs to load")
+L = parser.parse_args().layers
+SUFFIX = "" if L == 2 else f"L{L}"   # run-name suffix of the depth-sweep runs
+OUT_SUFFIX = "" if L == 2 else f"_L{L}"
 
 
 def run_args(train_name):
@@ -113,8 +121,8 @@ group = pd.qcut(length.rank(method="first"), 3, labels=["short", "medium", "long
 rows, grows = [], []
 for model_name in MODELS:
     for seed in SEEDS:
-        model, args = load_model(f"{model_name}_LastFM_s{seed}")
-        assert args.max_seq_length == input_ids.shape[1]
+        model, args = load_model(f"{model_name}{SUFFIX}_LastFM_s{seed}")
+        assert args.max_seq_length == input_ids.shape[1] and args.num_hidden_layers == L
         branch = {}
         hooks = []
         for i, block in enumerate(model.item_encoder.blocks, 1):
@@ -148,8 +156,8 @@ for model_name in MODELS:
                              **across_users(t[:, -1, :].double().numpy(), center)})
 
 df, gdf = pd.DataFrame(rows), pd.DataFrame(grows)
-df.round(4).to_csv(RESULTS / "oversmoothing.csv", index=False)
-gdf.round(4).to_csv(RESULTS / "oversmoothing_groups.csv", index=False)
+df.round(4).to_csv(RESULTS / f"oversmoothing{OUT_SUFFIX}.csv", index=False)
+gdf.round(4).to_csv(RESULTS / f"oversmoothing_groups{OUT_SUFFIX}.csv", index=False)
 
 METRICS = ["cos_sim", "hf_share", "top1_share"]
 pd.set_option("display.width", 200)
@@ -165,9 +173,9 @@ print(f"### Block outputs, mean over {len(seqs)} test sequences; mean ± std ove
 print("(layer 0 = embeddings; cos_sim/top1_share higher and hf_share lower = smoother)")
 print(mean_std(blocks, ["model", "layer"]).reindex(MODELS, level=0).to_string())
 
-print("\n### Change from layer 0 to layer 2 (mean over seeds)")
+print(f"\n### Change from layer 0 to layer {L} (mean over seeds)")
 m = blocks.groupby(["model", "layer"])[METRICS].mean()
-print((m.xs(2, level="layer") - m.xs(0, level="layer")).reindex(MODELS).round(4).to_string())
+print((m.xs(L, level="layer") - m.xs(0, level="layer")).reindex(MODELS).round(4).to_string())
 
 print("\n### Robustness: block outputs after removing the vector shared by all positions (mean ± std over seeds)")
 print(mean_std(df[df.part == "block centered"], ["model", "layer"]).reindex(MODELS, level=0).to_string())
@@ -175,25 +183,25 @@ print(mean_std(df[df.part == "block centered"], ["model", "layer"]).reindex(MODE
 print("\n### Inside each layer: attention branch vs Fourier branch (mean ± std over seeds)")
 print(mean_std(df[df.part.isin(["attention", "fourier"])], ["model", "layer", "part"]).reindex(MODELS, level=0).to_string())
 
-print("\n### Final layer (2) by history length (mean ± std over seeds)")
-print(mean_std(gdf[gdf.layer == 2], ["history_length", "model"])
+print(f"\n### Final layer ({L}) by history length (mean ± std over seeds)")
+print(mean_std(gdf[gdf.layer == L], ["history_length", "model"])
       .reindex(pd.MultiIndex.from_product([["short", "medium", "long"], MODELS])).to_string())
 
 print("\n### Per-seed final-layer cos_sim: is BSARec smoother than SASRec?")
 for part in ["block", "block centered"]:
-    fin = df[(df.part == part) & (df.layer == 2)].pivot(index="seed", columns="model", values="cos_sim")[MODELS]
+    fin = df[(df.part == part) & (df.layer == L)].pivot(index="seed", columns="model", values="cos_sim")[MODELS]
     print(f"{part}:"); print(fin.round(4).to_string())
 
 print("\n### Across users: each user's last-position vector, the one used for ranking (mean ± std over seeds)")
 print("(the other reading of the paper's Fig. 3; higher = users' representations more alike)")
 across = df[df.part == "across users"]
 print(mean_std(across, ["model", "layer"], ["cos_sim", "top1_share"]).reindex(MODELS, level=0).to_string())
-print("per seed, layer 2 cos_sim:")
-print(across[across.layer == 2].pivot(index="seed", columns="model", values="cos_sim")[MODELS].round(4).to_string())
-print("Robustness: top1_share after removing the mean user vector (mean ± std over seeds); per seed, layer 2:")
+print(f"per seed, layer {L} cos_sim:")
+print(across[across.layer == L].pivot(index="seed", columns="model", values="cos_sim")[MODELS].round(4).to_string())
+print(f"Robustness: top1_share after removing the mean user vector (mean ± std over seeds); per seed, layer {L}:")
 centered = df[df.part == "across users centered"]
 print(mean_std(centered, ["model", "layer"], ["top1_share"]).reindex(MODELS, level=0).to_string())
-print(centered[centered.layer == 2].pivot(index="seed", columns="model", values="top1_share")[MODELS].round(4).to_string())
+print(centered[centered.layer == L].pivot(index="seed", columns="model", values="top1_share")[MODELS].round(4).to_string())
 
 # Figure: two small multiples (cos_sim, hf_share) by layer; one line per model (seed mean),
 # faint points per seed. Colour + marker shape per model; direct labels at the line ends.
@@ -211,23 +219,23 @@ for ax, met in zip(axes, ["cos_sim", "hf_share"]):
         ax.scatter(d.layer, d[met], color=COLORS[mod], marker=MARKERS[mod], s=14, alpha=0.35, linewidths=0)
         ax.plot(mean.index, mean.values, color=COLORS[mod], marker=MARKERS[mod], lw=2, ms=7,
                 markeredgecolor="#fcfcfb", markeredgewidth=1.5, label=LABELS[mod])
-    ax.set_xticks([0, 1, 2], ["embedding", "layer 1", "layer 2"])
+    ax.set_xticks(range(L + 1), ["embedding"] + [f"layer {i}" for i in range(1, L + 1)])
     ax.set_title(titles[met], fontsize=9, color=INK, loc="left")
     ax.tick_params(colors=MUTED, labelsize=8, length=0)
     ax.grid(axis="y", color=GRID, linewidth=0.8); ax.set_axisbelow(True)
     for s in ["top", "right", "left"]: ax.spines[s].set_visible(False)
     ax.spines["bottom"].set_color(GRID)
-    ax.set_xlim(-0.2, 2.75)
-    ends = blocks[blocks.layer == 2].groupby("model")[met].mean().sort_values()
+    ax.set_xlim(-0.2, L + 0.75)
+    ends = blocks[blocks.layer == L].groupby("model")[met].mean().sort_values()
     ys = list(ends.values)
     span = ax.get_ylim()[1] - ax.get_ylim()[0]
     for j in range(1, len(ys)):                               # nudge labels apart
         ys[j] = max(ys[j], ys[j - 1] + 0.07 * span)
     for (mod, _), y in zip(ends.items(), ys):
-        ax.annotate(LABELS[mod], (2, y), xytext=(10, 0), textcoords="offset points",
+        ax.annotate(LABELS[mod], (L, y), xytext=(10, 0), textcoords="offset points",
                     va="center", fontsize=8, color=INK)
 axes[0].legend(frameon=False, fontsize=8, loc="upper left")
 fig.suptitle("Oversmoothing by layer on LastFM test sequences (seed mean; faint points = seeds)",
              fontsize=10, color=INK, x=0.01, ha="left")
 plt.tight_layout()
-plt.savefig(FIGURES / "oversmoothing.png", dpi=200, metadata={"Software": None})
+plt.savefig(FIGURES / f"oversmoothing{OUT_SUFFIX}.png", dpi=200, metadata={"Software": None})
