@@ -4,27 +4,35 @@ This repository is a reproduction study of **BSARec** (Shin et al., "An Attentiv
 
 ## Relationship to the original code
 
-- Built on the authors' official implementation: https://github.com/yehjin-shin/BSARec, at commit \`${UP}\`.
-- This is not a GitHub fork. I cloned the original repository and pushed it to this repository, so the full upstream history is preserved. **Every commit after \`${UP:0:7}\` is my work.**
-- See only my commits: \`git log --oneline ${UP:0:7}..HEAD\`
-- See every file I changed or added: \`git diff ${UP:0:7} HEAD --stat\`
-- The model implementations (\`src/model/\`), training framework and LastFM data file are the original authors' work.
+- Built on the authors' official implementation: https://github.com/yehjin-shin/BSARec, at commit `c80bdc0f1a889b78fe9a27e2058389cc84caea84`.
+- This is not a GitHub fork. I cloned the original repository and pushed it to this repository, so the full upstream history is preserved. **Every commit after `c80bdc0` is my work.**
+- See only my commits: `git log --oneline c80bdc0..HEAD`
+- See every file I changed or added: `git diff c80bdc0 HEAD --stat`
+- The model implementations (`src/model/`), training framework and LastFM data file are the original authors' work.
 
 ## What I added
 
 | Path | Purpose |
 | --- | --- |
-| \`analysis/validate_data.py\` | Checks the dataset against the paper's statistics |
-| \`analysis/popularity.py\` | Popularity baseline (not in the original code) |
-| \`analysis/collect_results.py\` | Collects test metrics from training logs into CSV |
-| \`analysis/summarize.py\` | Main results table and comparison with the paper |
-| \`analysis/plot_ablation.py\` | Alpha and c sensitivity figure |
-| \`analysis/groups.py\` | Per-user group analysis (history length, taste, popularity) |
-| \`analysis/hparams.sh\` | Hyperparameters used for all runs |
-| \`analysis/results/\`, \`analysis/figures/\` | All results and figures used in the report |
-| \`src/trainers.py\` | 3-line patch: saves each user's top-20 predictions during \`--do_eval\` (training and scoring unchanged) |
-| \`src/output/*.log\` | Training logs from my runs |
-| \`notes.md\` | Lab notebook: setup, commands, results and judgments |
+| `analysis/validate_data.py` | Checks the dataset against the paper's statistics |
+| `analysis/popularity.py` | Popularity baseline (not in the original code) |
+| `analysis/collect_results.py` | Collects test metrics from training logs into CSV |
+| `analysis/summarize.py` | Main results table and comparison with the paper |
+| `analysis/plot_ablation.py` | Alpha and c sensitivity figure |
+| `analysis/groups.py` | Per-user group analysis (history length, taste, popularity) |
+| `analysis/decomposition.py` | Splits BSARec's gain over SASRec into a loss effect and a Fourier-branch effect |
+| `analysis/beta.py` | Learned β per layer (paper Fig. 7a) |
+| `analysis/oversmoothing.py` | Layer-wise oversmoothing of SASRec vs BSARec (paper Fig. 3) |
+| `analysis/config.py` | Repo-relative paths shared by the analysis scripts |
+| `analysis/hparams.sh` | Hyperparameters used for all runs |
+| `analysis/results/`, `analysis/figures/` | All results and figures used in the report |
+| `analysis/predictions/` | Per-seed top-20 predictions used by the group analysis |
+| `run_all.sh`, `REPRODUCE.md`, `requirements.txt` | One-command reproduction, setup and a map from each result to its file |
+| `src/trainers.py` | 3-line patch: saves each user's top-20 predictions during `--do_eval` (training and scoring unchanged) |
+| `src/output/*.log`, `src/output/*_LastFM_s*.pt` | Training and evaluation logs from my runs, and the checkpoints the analysis loads |
+| `notes.md` | Lab notebook: setup, commands, results and judgments |
+
+To set up the environment and rerun everything, see [REPRODUCE.md](REPRODUCE.md).
 
 <div align=center>
 <h1>An Attentive Inductive Bias for Sequential Recommendation beyond the Self-Attention</h1>
