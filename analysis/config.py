@@ -11,4 +11,5 @@ RESULTS = ANALYSIS / "results"
 FIGURES = ANALYSIS / "figures"
 HPARAMS = ANALYSIS / "hparams.sh"
 DATA = ROOT / "src" / "data" / "LastFM.txt"
-OUTPUT = ROOT / "src" / "output"             # training logs and saved predictions
+OUTPUT = ROOT / "src" / "output"             # training logs and checkpoints
+PREDICTIONS = ANALYSIS / "predictions"       # per-seed top-20 predictions from --do_eval runs
