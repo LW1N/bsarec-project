@@ -63,21 +63,21 @@ On a fixed machine and software stack, runs are deterministic. Rerunning a seed 
 
 ## 5. Where each result comes from
 
-All paths are under `analysis/`. Report sections refer to the project report.
+All paths are under `analysis/`. Report parts refer to the final 6-page report (IEEE format).
 
-| Report section | Result | Files | Script |
+| Report part | Result | Files | Script |
 | --- | --- | --- | --- |
-| §4 Data and setup | Dataset statistics, history-length and artist-popularity plots | `results/validation.txt`, `figures/seq_lengths.png`, `figures/artist_popularity.png` | `validate_data.py` |
-| §5 Results | Main table (mean ± std over 3 seeds) and comparison with the paper's Table 2 | `results/main_table.csv`, `results/summary.txt` | `summarize.py` |
-| §5 Results | Per-run test metrics, collected from the logs | `results/results.csv` | `collect_results.py` |
-| §5 Results | Popularity baseline | `results/popularity.json` | `popularity.py` |
-| §5 Results | Paper's Table 2 LastFM rows (entered by hand from the paper) | `results/paper.csv` | none |
-| §6.1 α and c | Sensitivity sweep | `results/ablation.csv`, `results/ablation_summary.txt`, `figures/ablation.png` | `collect_results.py`, `plot_ablation.py` |
-| §6.2 Loss confound | SASRec vs BSARec at α = 0, α = 1 and the default: loss effect vs Fourier-branch effect | `results/variants_table.csv`, `results/decomposition.txt` | `decomposition.py` |
-| §6.3 User groups, §6.4 Popularity bias | NDCG@10 by history length, taste and test-artist popularity; share of popular artists in the top-10 | `results/groups_s42.txt`, `results/groups_s43.txt`, `results/groups_s44.txt` | `groups.py --seed <seed>` |
-| §6 Analysis | Learned β per layer (paper Fig. 7a) | `results/beta.csv`, `results/beta_summary.txt`, `figures/beta.png` | `beta.py` |
-| §6 Analysis | Oversmoothing per layer (paper Fig. 3) | `results/oversmoothing.txt`, `results/oversmoothing.csv`, `results/oversmoothing_groups.csv`, `figures/oversmoothing.png` | `oversmoothing.py` |
-| §6 Analysis | Oversmoothing at 4 and 8 layers, and 2/4/8-layer comparison of the final block | `results/oversmoothing_L4.txt`, `results/oversmoothing_L8.txt` (with `.csv`, `oversmoothing_groups_L*.csv`), `figures/oversmoothing_L4.png`, `figures/oversmoothing_L8.png`, `results/oversmoothing_depth.txt` | `oversmoothing.py --layers <L>`, `oversmoothing_depth.py` |
+| Sec. IV Setup | Dataset statistics (the history-length and artist-popularity plots are extra) | `results/validation.txt`, `figures/seq_lengths.png`, `figures/artist_popularity.png` | `validate_data.py` |
+| Sec. V, Table I | Main table (mean ± std over 3 seeds) and comparison with the paper's Table 2 | `results/main_table.csv`, `results/summary.txt` | `summarize.py` |
+| Sec. V | Per-run test metrics, collected from the logs | `results/results.csv` | `collect_results.py` |
+| Sec. V, Table I | Popularity baseline | `results/popularity.json` | `popularity.py` |
+| Sec. V, Table I | Paper's Table 2 LastFM rows (entered by hand from the paper) | `results/paper.csv` | none |
+| Sec. VI-A, Fig. 1 | α and c sensitivity sweep | `results/ablation.csv`, `results/ablation_summary.txt`, `figures/ablation.png` | `collect_results.py`, `plot_ablation.py` |
+| Sec. VI-B, Table II | SASRec vs BSARec at α = 0, α = 1 and the default: loss effect vs Fourier-branch effect | `results/variants_table.csv`, `results/decomposition.txt` | `decomposition.py` |
+| Sec. VI-C, Table III | NDCG@10 by history length, taste and test-artist popularity; share of popular artists in the top-10 | `results/groups_s42.txt`, `results/groups_s43.txt`, `results/groups_s44.txt` | `groups.py --seed <seed>` |
+| Sec. VI-D | Learned β per layer (paper Fig. 7a) | `results/beta.csv`, `results/beta_summary.txt`, `figures/beta.png` | `beta.py` |
+| Sec. VI-D | Oversmoothing per layer (paper Fig. 3) | `results/oversmoothing.txt`, `results/oversmoothing.csv`, `results/oversmoothing_groups.csv`, `figures/oversmoothing.png` | `oversmoothing.py` |
+| Sec. VI-D, Table IV | Oversmoothing at 4 and 8 layers, and 2/4/8-layer comparison of the final block | `results/oversmoothing_L4.txt`, `results/oversmoothing_L8.txt` (with `.csv`, `oversmoothing_groups_L*.csv`), `figures/oversmoothing_L4.png`, `figures/oversmoothing_L8.png`, `results/oversmoothing_depth.txt` | `oversmoothing.py --layers <L>`, `oversmoothing_depth.py` |
 
 Every script reads its paths from `analysis/config.py`, so it can also be run on its own from any directory, e.g. `python analysis/summarize.py > analysis/results/summary.txt`. `run_all.sh` shows the exact invocation of each one.
 
