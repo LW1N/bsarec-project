@@ -5,9 +5,9 @@ This repository is a reproduction study of **BSARec** (Shin et al., "An Attentiv
 ## Relationship to the original code
 
 - Built on the authors' official implementation: https://github.com/yehjin-shin/BSARec, at commit `c80bdc0f1a889b78fe9a27e2058389cc84caea84`.
-- This is not a GitHub fork. I cloned the original repository and pushed it to this repository, so the full upstream history is preserved. **Every commit after `c80bdc0` is my work.**
-- See only my commits: `git log --oneline c80bdc0..HEAD`
-- See every file I changed or added: `git diff c80bdc0 HEAD --stat`
+- This is not a GitHub fork. The first commit here (`6fcefa1`, authored by the original authors) is the upstream code at that commit, with its 103 commits squashed into one; the full history is in the upstream repository. **Every commit after `6fcefa1` is my work.**
+- See only my commits: `git log --oneline 6fcefa1..HEAD`
+- See every file I changed or added: `git diff 6fcefa1 HEAD --stat`
 - The model implementations (`src/model/`), training framework and LastFM data file are the original authors' work.
 
 ## What I added
