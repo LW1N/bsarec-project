@@ -31,7 +31,6 @@ This repository is a reproduction study of **BSARec** (Shin et al., "An Attentiv
 | `run_all.sh`, `REPRODUCE.md`, `requirements.txt` | One-command reproduction, setup and a map from each result to its file |
 | `src/trainers.py` | 3-line patch: saves each user's top-20 predictions during `--do_eval` (training and scoring unchanged) |
 | `src/output/*.log`, `src/output/*_LastFM_s*.pt` | Training and evaluation logs from my runs, and the checkpoints the analysis loads |
-| `notes.md` | Lab notebook: setup, commands, results and judgments |
 
 To set up the environment and rerun everything, see [REPRODUCE.md](REPRODUCE.md).
 

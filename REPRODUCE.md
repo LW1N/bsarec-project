@@ -1,6 +1,6 @@
 # Reproducing the results
 
-This file explains how to rerun every result in `analysis/results/` and `analysis/figures/`. The reproduction study is described in `README.md`, and the full lab notebook (commands, outputs and judgments) is in `notes.md`.
+This file explains how to rerun every result in `analysis/results/` and `analysis/figures/`. The reproduction study is described in `README.md`.
 
 ## 1. Setup
 
